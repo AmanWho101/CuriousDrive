@@ -13,3 +13,11 @@ Scaffold MySQL Database =>
 dotnet ef dbcontext scaffold Name=NorthwindDB Pomelo.EntityFrameworkCore.MySql --output-dir Models --context-dir Data --namespace Northwind.Models --context-namespace Northwind.Data --context NorthwindContext -f --no-onconfiguring
 
 dotnet add package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+
+builder.Services.AddDbContext<NorthwindContext>(
+    options =>{
+        options.UseMySql(builder.Configuration.GetConnectionString("NorthwindDB"),
+        Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.23-mysql")
+        );
+    }
+);
